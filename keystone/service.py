@@ -29,6 +29,7 @@ from keystone import policy
 from keystone import routers
 from keystone import token
 from keystone import trust
+from keystone.contrib import quotas
 
 
 CONF = config.CONF
@@ -42,7 +43,8 @@ DRIVERS = dict(
     policy_api=policy.Manager(),
     token_api=token.Manager(),
     trust_api=trust.Manager(),
-    token_provider_api=token.provider.Manager())
+    token_provider_api=token.provider.Manager(),
+    quotas_api=quotas.core.Manager())
 
 
 @logging.fail_gracefully
