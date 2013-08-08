@@ -171,7 +171,7 @@ class SQLQuotaDriver(sql.Base):
             raise exception.UserQuotaNotFound(quota_id=quota_id)
 
         with session.begin():
-            ref = self._get_quota(session, quota_id)
+            ref = self._get_user_quota(session, quota_id)
 
             q.delete(False)
 
@@ -226,13 +226,13 @@ class SQLQuotaDriver(sql.Base):
 
     def delete_project_quota(self, project_id, quota_id):
         session = self.get_session()
-        q = session.query(ProjectQuota).filter_by(id=quota_id, project_id=project_id).first()
+        q = session.query(ProjectQuota).filter_by(id=quota_id, project_id=project_id)
 
         if not q.first():
             raise exception.ProjectQuotaNotFound(quota_id=quota_id)
 
         with session.begin():
-            ref = self._get_quota(session, quota_id)
+            ref = self._get_project_quota(session, quota_id)
 
             q.delete(False)
 

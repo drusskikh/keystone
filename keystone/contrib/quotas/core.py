@@ -85,7 +85,7 @@ class ProjectQuotaV3(controller.V3Controller):
 
     @controller.protected
     def create_quota(self, context, project_id, quota):
-        self.identity_api.driver.get_project(project_id)
+        self.assignment_api.driver.get_project(project_id)
         resource_id = quota.get('resource_id')
         if not resource_id:
             raise Exception('Bad request')
@@ -96,14 +96,14 @@ class ProjectQuotaV3(controller.V3Controller):
 
     @controller.protected
     def get_quota(self, context, project_id, quota_id):
-        ref = self.quotas_api.driver.get_project_quota(user_id, quota_id)
+        ref = self.quotas_api.driver.get_project_quota(project_id, quota_id)
         return self.wrap_member(context, ref)
 
     @controller.protected
     def update_quota(self, context, project_id, quota_id, quota):
         ref = self.quotas_api.driver.update_project_quota(project_id,
-                                                       quota_id,
-                                                       quota)
+                                                          quota_id,
+                                                          quota)
         return self.wrap_member(context, ref)
 
     @controller.protected
@@ -239,7 +239,7 @@ class QuotasExtention(wsgi.ExtensionRouter):
 
         mapper.connect(
             '/project/{project_id}/OS-QUOTAS/quotas/{quota_id}',
-            controller=resource_controller,
+            controller=project_quota_controller,
             action='update_quota',
             conditions=dict(method=['PATCH']))
 
