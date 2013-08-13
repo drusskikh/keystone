@@ -49,6 +49,24 @@
     "identity:check_user_in_group": [["rule:admin_required"]],
     "identity:add_user_to_group": [["rule:admin_required"]],
 
+    "identity:create_resource": [["rule:admin_required"]],
+    "identity:list_resources": [["rule:admin_required"]],
+    "identity:get_resource": [["rule:admin_required"]],
+    "identity:update_resource": [["rule:admin_required"]],
+    "identity:delete_resource": [["rule:admin_required"]],
+
+    "identity:create_user_quota": [["rule:admin_required"]],
+    "identity:list_user_quotas": [["rule:admin_required"]],
+    "identity:get_user_quota": [["rule:admin_required"]],
+    "identity:update_user_quota": [["rule:admin_required"]],
+    "identity:delete_user_quota": [["rule:admin_required"]],
+
+    "identity:create_project_quota": [["rule:admin_required"]],
+    "identity:list_project_quotas": [["rule:admin_required"]],
+    "identity:get_project_quota": [["rule:admin_required"]],
+    "identity:update_project_quota": [["rule:admin_required"]],
+    "identity:delete_project_quota": [["rule:admin_required"]],
+
     "identity:get_credential": [["rule:admin_required"]],
     "identity:list_credentials": [["rule:admin_required"]],
     "identity:create_credential": [["rule:admin_required"]],

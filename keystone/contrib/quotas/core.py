@@ -195,62 +195,62 @@ class QuotasExtention(wsgi.ExtensionRouter):
 
         # user quota operations
         mapper.connect(
-            '/user/{user_id}/OS-QUOTAS/quotas',
+            '/users/{user_id}/OS-QUOTAS/quotas',
             controller=user_quota_controller,
             action='create_quota',
             conditions=dict(method=['POST']))
 
         mapper.connect(
-            '/user/{user_id}/OS-QUOTAS/quotas/{quota_id}',
+            '/users/{user_id}/OS-QUOTAS/quotas/{quota_id}',
             controller=user_quota_controller,
             action='get_quota',
             conditions=dict(method=['GET']))
 
         mapper.connect(
-            '/user/{user_id}/OS-QUOTAS/quotas/{quota_id}',
+            '/users/{user_id}/OS-QUOTAS/quotas/{quota_id}',
             controller=user_quota_controller,
             action='update_quota',
             conditions=dict(method=['PATCH']))
 
         mapper.connect(
-            '/user/{user_id}/OS-QUOTAS/quotas/{quota_id}',
+            '/users/{user_id}/OS-QUOTAS/quotas/{quota_id}',
             controller=user_quota_controller,
             action='delete_quota',
             conditions=dict(method=['DELETE']))
 
         mapper.connect(
-            '/user/{user_id}/OS-QUOTAS/quotas',
+            '/users/{user_id}/OS-QUOTAS/quotas',
             controller=user_quota_controller,
             action='list_quotas',
             conditions=dict(method=['GET']))
 
         # project quota operations
         mapper.connect(
-            '/project/{project_id}/OS-QUOTAS/quotas',
+            '/projects/{project_id}/OS-QUOTAS/quotas',
             controller=project_quota_controller,
             action='create_quota',
             conditions=dict(method=['POST']))
 
         mapper.connect(
-            '/project/{project_id}/OS-QUOTAS/quotas/{quota_id}',
+            '/projects/{project_id}/OS-QUOTAS/quotas/{quota_id}',
             controller=project_quota_controller,
             action='get_quota',
             conditions=dict(method=['GET']))
 
         mapper.connect(
-            '/project/{project_id}/OS-QUOTAS/quotas/{quota_id}',
+            '/projects/{project_id}/OS-QUOTAS/quotas/{quota_id}',
             controller=project_quota_controller,
             action='update_quota',
             conditions=dict(method=['PATCH']))
 
         mapper.connect(
-            '/project/{project_id}/OS-QUOTAS/quotas/{quota_id}',
+            '/projects/{project_id}/OS-QUOTAS/quotas/{quota_id}',
             controller=project_quota_controller,
             action='delete_quota',
             conditions=dict(method=['DELETE']))
 
         mapper.connect(
-            '/project/{project_id}/OS-QUOTAS/quotas',
+            '/projects/{project_id}/OS-QUOTAS/quotas',
             controller=project_quota_controller,
             action='list_quotas',
             conditions=dict(method=['GET']))

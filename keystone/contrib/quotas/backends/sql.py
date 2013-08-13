@@ -165,7 +165,7 @@ class SQLQuotaDriver(sql.Base):
 
     def delete_user_quota(self, user_id, quota_id):
         session = self.get_session()
-        q = session.query(UserQuota).filter_by(id=quota_id, user_id=user_id).first()
+        q = session.query(UserQuota).filter_by(id=quota_id, user_id=user_id)
 
         if not q.first():
             raise exception.UserQuotaNotFound(quota_id=quota_id)
