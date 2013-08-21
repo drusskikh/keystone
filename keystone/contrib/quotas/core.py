@@ -84,7 +84,7 @@ class ProjectQuotaV3(controller.V3Controller):
     member_name = 'quota'
 
     @controller.protected
-    def create_quota(self, context, project_id, quota):
+    def create_project_quota(self, context, project_id, quota):
         self.assignment_api.driver.get_project(project_id)
         resource_id = quota.get('resource_id')
         if not resource_id:
@@ -95,23 +95,23 @@ class ProjectQuotaV3(controller.V3Controller):
         return self.wrap_member(context, ref)
 
     @controller.protected
-    def get_quota(self, context, project_id, quota_id):
+    def get_project_quota(self, context, project_id, quota_id):
         ref = self.quotas_api.driver.get_project_quota(project_id, quota_id)
         return self.wrap_member(context, ref)
 
     @controller.protected
-    def update_quota(self, context, project_id, quota_id, quota):
+    def update_project_quota(self, context, project_id, quota_id, quota):
         ref = self.quotas_api.driver.update_project_quota(project_id,
                                                           quota_id,
                                                           quota)
         return self.wrap_member(context, ref)
 
     @controller.protected
-    def delete_quota(self, context, project_id, quota_id):
+    def delete_project_quota(self, context, project_id, quota_id):
         self.quotas_api.driver.delete_project_quota(project_id, quota_id)
 
     @controller.filterprotected('resource_id')
-    def list_quotas(self, context, filters, project_id):
+    def list_project_quotas(self, context, filters, project_id):
         refs = self.quotas_api.driver.list_project_quotas(project_id)
         return self.wrap_collection(context, refs, filters)
 
@@ -123,7 +123,7 @@ class UserQuotaV3(controller.V3Controller):
     member_name = 'quota'
 
     @controller.protected
-    def create_quota(self, context, user_id, quota):
+    def create_user_quota(self, context, user_id, quota):
         self.identity_api.driver.get_user(user_id)
         resource_id = quota.get('resource_id')
         if not resource_id:
@@ -134,23 +134,23 @@ class UserQuotaV3(controller.V3Controller):
         return self.wrap_member(context, ref)
 
     @controller.protected
-    def get_quota(self, context, user_id, quota_id):
+    def get_user_quota(self, context, user_id, quota_id):
         ref = self.quotas_api.driver.get_user_quota(user_id, quota_id)
         return self.wrap_member(context, ref)
 
     @controller.protected
-    def update_quota(self, context, user_id, quota_id, quota):
+    def update_user_quota(self, context, user_id, quota_id, quota):
         ref = self.quotas_api.driver.update_user_quota(user_id,
                                                        quota_id,
                                                        quota)
         return self.wrap_member(context, ref)
 
     @controller.protected
-    def delete_quota(self, context, user_id, quota_id):
+    def delete_user_quota(self, context, user_id, quota_id):
         self.quotas_api.driver.delete_user_quota(user_id, quota_id)
 
     @controller.filterprotected('resource_id')
-    def list_quotas(self, context, filters, user_id):
+    def list_user_quotas(self, context, filters, user_id):
         refs = self.quotas_api.driver.list_user_quotas(user_id)
         return self.wrap_collection(context, refs, filters)
 
@@ -197,60 +197,60 @@ class QuotasExtention(wsgi.ExtensionRouter):
         mapper.connect(
             '/users/{user_id}/OS-QUOTAS/quotas',
             controller=user_quota_controller,
-            action='create_quota',
+            action='create_user_quota',
             conditions=dict(method=['POST']))
 
         mapper.connect(
             '/users/{user_id}/OS-QUOTAS/quotas/{quota_id}',
             controller=user_quota_controller,
-            action='get_quota',
+            action='get_user_quota',
             conditions=dict(method=['GET']))
 
         mapper.connect(
             '/users/{user_id}/OS-QUOTAS/quotas/{quota_id}',
             controller=user_quota_controller,
-            action='update_quota',
+            action='update_user_quota',
             conditions=dict(method=['PATCH']))
 
         mapper.connect(
             '/users/{user_id}/OS-QUOTAS/quotas/{quota_id}',
             controller=user_quota_controller,
-            action='delete_quota',
+            action='delete_user_quota',
             conditions=dict(method=['DELETE']))
 
         mapper.connect(
             '/users/{user_id}/OS-QUOTAS/quotas',
             controller=user_quota_controller,
-            action='list_quotas',
+            action='list_user_quotas',
             conditions=dict(method=['GET']))
 
         # project quota operations
         mapper.connect(
             '/projects/{project_id}/OS-QUOTAS/quotas',
             controller=project_quota_controller,
-            action='create_quota',
+            action='create_project_quota',
             conditions=dict(method=['POST']))
 
         mapper.connect(
             '/projects/{project_id}/OS-QUOTAS/quotas/{quota_id}',
             controller=project_quota_controller,
-            action='get_quota',
+            action='get_project_quota',
             conditions=dict(method=['GET']))
 
         mapper.connect(
             '/projects/{project_id}/OS-QUOTAS/quotas/{quota_id}',
             controller=project_quota_controller,
-            action='update_quota',
+            action='update_project_quota',
             conditions=dict(method=['PATCH']))
 
         mapper.connect(
             '/projects/{project_id}/OS-QUOTAS/quotas/{quota_id}',
             controller=project_quota_controller,
-            action='delete_quota',
+            action='delete_project_quota',
             conditions=dict(method=['DELETE']))
 
         mapper.connect(
             '/projects/{project_id}/OS-QUOTAS/quotas',
             controller=project_quota_controller,
-            action='list_quotas',
+            action='list_project_quotas',
             conditions=dict(method=['GET']))

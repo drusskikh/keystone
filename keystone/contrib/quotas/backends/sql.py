@@ -241,6 +241,13 @@ class SQLQuotaDriver(sql.Base):
 
     def list_project_quotas(self, project_id):
         session = self.get_session()
-        refs = session.query(ProjectQuota).filter_by(project_id=project_id).all()
-        return [ref.to_dict() for ref in refs]
+        refs = session.query(ProjectQuota, Resource).filter(ProjectQuota.resource_id==Resource.id).filter_by(project_id=project_id).all()
 
+        ref_lst = []
+        for ref in refs:
+            ref_dict = ref[0].to_dict()
+            ref_dict.pop('resource_id')
+            ref_dict['resource'] = ref[1].to_dict()
+            ref_lst.append(ref_dict)
+
+        return ref_lst
